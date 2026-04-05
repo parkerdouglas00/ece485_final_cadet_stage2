@@ -157,54 +157,78 @@ architecture Behavioral of riscv_pipeline is
     end component;
     
     component pipeline_registers 
-        Port (
-            clk         : in  STD_LOGIC;
-            reset       : in  STD_LOGIC;
-            -- IF/ID pipeline registers
-            if_id_reg_write : in STD_LOGIC;
-            if_id_alu_src : in STD_LOGIC;
-            if_id_mem_read : in STD_LOGIC;
-            if_id_mem_write : in STD_LOGIC;
-            if_id_branch : in STD_LOGIC;
-            if_id_jump : in STD_LOGIC;
-            if_id_load_addr : in STD_LOGIC;
-            if_id_instr : in  STD_LOGIC_VECTOR(31 downto 0);
-            -- <add other if_id registers>
-           
-            -- ID/EX pipeline registers
-            id_ex_reg_write : inout STD_LOGIC;
-            id_ex_alu_src : inout STD_LOGIC;
-            id_ex_mem_read : inout STD_LOGIC;
-            id_ex_mem_write : inout STD_LOGIC;
-            id_ex_branch : inout STD_LOGIC;
-            id_ex_jump : inout STD_LOGIC;
-            id_ex_load_addr : inout STD_LOGIC;
-            id_ex_instr : out STD_LOGIC_VECTOR(31 downto 0);
-            id_ex_reg1_data  : inout  STD_LOGIC_VECTOR(31 downto 0);
-            -- <add other id_ex registers>
-            
-            -- EX/MEM pipeline registers        
-            ex_mem_reg_write : inout STD_LOGIC;
-            ex_mem_alu_src : inout STD_LOGIC;
-            ex_mem_mem_read : inout STD_LOGIC;
-            ex_mem_mem_write : inout STD_LOGIC;
-            ex_mem_branch : out STD_LOGIC;
-            ex_mem_jump : out STD_LOGIC;
-            ex_mem_load_addr : inout STD_LOGIC;
-            ex_mem_reg1_data : out STD_LOGIC_VECTOR(31 downto 0);
-            -- <add other ex_mem registers>
-            
-            -- MEM/WB pipeline registers
-            mem_wb_reg_write : out STD_LOGIC;
-            mem_wb_alu_src : out STD_LOGIC;
-            mem_wb_mem_read : out STD_LOGIC;
-            mem_wb_mem_write : out STD_LOGIC;
-            mem_wb_load_addr : out STD_LOGIC;
-            mem_wb_alu_result  : out STD_LOGIC_VECTOR(31 downto 0)
-            -- <add other mem_wb registers>
-            
-        );
-    end component;
+    Port (
+        clk         : in  STD_LOGIC;
+        reset       : in  STD_LOGIC;
+        -- IF/ID pipeline registers
+        if_id_reg_write : in STD_LOGIC;
+        if_id_alu_src : in STD_LOGIC;
+        if_id_mem_read : in STD_LOGIC;
+        if_id_mem_write : in STD_LOGIC;
+        if_id_branch : in STD_LOGIC;
+        if_id_jump : in STD_LOGIC;
+        if_id_load_addr : in STD_LOGIC;
+        if_id_instr : in  STD_LOGIC_VECTOR(31 downto 0);
+        -- <add other if_id registers>
+        if_id_npc   : in std_logic_vector(31 downto 0);
+        if_id_reg1_data   : in std_logic_vector(31 downto 0);
+        if_id_reg2_data   : in std_logic_vector(31 downto 0);
+        if_id_imm   : in std_logic_vector(31 downto 0);
+        if_id_alu_op    : in std_logic_vector(3 downto 0);
+        if_id_rs1    : in std_logic_vector(4 downto 0);
+        if_id_rs2    : in std_logic_vector(4 downto 0);
+        if_id_rd    : in std_logic_vector(4 downto 0);
+        
+        -- ID/EX pipeline registers
+        id_ex_reg_write : inout STD_LOGIC;
+        id_ex_alu_src : inout STD_LOGIC;
+        id_ex_mem_read : inout STD_LOGIC;
+        id_ex_mem_write : inout STD_LOGIC;
+        id_ex_branch : inout STD_LOGIC;
+        id_ex_jump : inout STD_LOGIC;
+        id_ex_load_addr : inout STD_LOGIC;
+        id_ex_instr : out STD_LOGIC_VECTOR(31 downto 0);
+        id_ex_reg1_data  : inout  STD_LOGIC_VECTOR(31 downto 0);
+        -- <add other id_ex registers>
+        id_ex_npc   : inout std_logic_vector(31 downto 0);
+        id_ex_reg2_data   : inout std_logic_vector(31 downto 0);
+        id_ex_imm   : inout std_logic_vector(31 downto 0);
+        id_ex_alu_op    : out std_logic_vector(3 downto 0);
+        id_ex_rs1    : out std_logic_vector(4 downto 0);
+        id_ex_rs2    : out std_logic_vector(4 downto 0);
+        id_ex_rd    : inout std_logic_vector(4 downto 0);
+        id_ex_alu_result : in std_logic_vector(31 downto 0);
+        
+        -- EX/MEM pipeline registers        
+        ex_mem_reg_write : inout STD_LOGIC;
+        ex_mem_alu_src : inout STD_LOGIC;
+        ex_mem_mem_read : inout STD_LOGIC;
+        ex_mem_mem_write : inout STD_LOGIC;
+        ex_mem_branch : out STD_LOGIC;
+        ex_mem_jump : out STD_LOGIC;
+        ex_mem_load_addr : inout STD_LOGIC;
+        ex_mem_reg1_data : out STD_LOGIC_VECTOR(31 downto 0);
+        -- <add other ex_mem registers>
+        ex_mem_npc   : inout std_logic_vector(31 downto 0);
+        ex_mem_reg2_data   : out std_logic_vector(31 downto 0);
+        ex_mem_alu_result    : inout std_logic_vector(31 downto 0);
+        ex_mem_imm    : out std_logic_vector(31 downto 0);
+        ex_mem_rd    : inout std_logic_vector(4 downto 0);
+        
+        
+        -- MEM/WB pipeline registers
+        mem_wb_reg_write : out STD_LOGIC;
+        mem_wb_alu_src : out STD_LOGIC;
+        mem_wb_mem_read : out STD_LOGIC;
+        mem_wb_mem_write : out STD_LOGIC;
+        mem_wb_load_addr : out STD_LOGIC;
+        mem_wb_alu_result  : out STD_LOGIC_VECTOR(31 downto 0);
+        -- <add other mem_wb registers>
+        mem_wb_npc   : out std_logic_vector(31 downto 0);
+        mem_wb_rd    : out std_logic_vector(4 downto 0)
+        
+    );
+end component;
 
 begin
 
@@ -246,6 +270,14 @@ begin
             if_id_load_addr => if_id_load_addr,
             if_id_instr => if_id_instr,
             -- <add other if_id registers>
+            if_id_npc       => if_id_npc,
+            if_id_reg1_data => if_id_reg1_data,
+            if_id_reg2_data => if_id_reg2_data,
+            if_id_imm       => if_id_imm,
+            if_id_alu_op    => if_id_alu_op,
+            if_id_rs1       => if_id_rs1,
+            if_id_rs2       => if_id_rs2,
+            if_id_rd        => if_id_rd,
 
             -- ID/EX pipeline registers
             id_ex_reg_write => id_ex_reg_write,
@@ -258,6 +290,14 @@ begin
             id_ex_instr => id_ex_instr,
             id_ex_reg1_data  => id_ex_reg1_data,
             -- <add other id_ex registers>
+            id_ex_npc        => id_ex_npc,
+            id_ex_reg2_data  => id_ex_reg2_data,
+            id_ex_imm        => id_ex_imm,
+            id_ex_alu_op     => id_ex_alu_op,
+            id_ex_rs1        => id_ex_rs1,
+            id_ex_rs2        => id_ex_rs2,
+            id_ex_rd         => id_ex_rd,
+            id_ex_alu_result => id_ex_alu_result,
 
             -- EX/MEM pipeline registers
             ex_mem_reg_write => ex_mem_reg_write,
@@ -269,6 +309,11 @@ begin
             ex_mem_load_addr => ex_mem_load_addr,
             ex_mem_reg1_data => ex_mem_reg1_data,
             -- <add other ex_mem registers>
+            ex_mem_npc        => ex_mem_npc,
+            ex_mem_reg2_data  => ex_mem_reg2_data,
+            ex_mem_alu_result => ex_mem_alu_result,
+            ex_mem_imm        => ex_mem_imm,
+            ex_mem_rd         => ex_mem_rd,
             
             -- MEM/WB pipeline registers
             mem_wb_reg_write => mem_wb_reg_write,
@@ -276,8 +321,10 @@ begin
             mem_wb_mem_read => mem_wb_mem_read,
             mem_wb_mem_write => mem_wb_mem_write,
             mem_wb_load_addr => mem_wb_load_addr,
-            mem_wb_alu_result  => mem_wb_alu_result
+            mem_wb_alu_result  => mem_wb_alu_result,
             -- <add other mem_wb registers>
+            mem_wb_npc => mem_wb_npc,
+            mem_wb_rd  => mem_wb_rd 
         );
     
     -- Instruction memory
@@ -292,10 +339,10 @@ begin
     if_id_npc    <= NPC;
 
     -- Decode instruction fields
-    if_id_rs1 <= if_id_instr(<define bit> downto<define bit>);
-    if_id_rs2 <= if_id_instr(<define bit> downto<define bit>);
-    if_id_rd  <= if_id_instr(<define bit> downto<define bit>);
-    opcode <= if_id_instr(<define bit> downto<define bit>);
+    if_id_rs1 <= if_id_instr(19 downto 15);
+    if_id_rs2 <= if_id_instr(24 downto 20);
+    if_id_rd  <= if_id_instr(11 downto 7);
+    opcode <= if_id_instr(6 downto 0);
 
     -- Control unit
     control_unit_inst: control_unit
@@ -320,14 +367,14 @@ begin
     -- ALU control unit
     alu_control_inst: alu_control
             port map (
-                funct3 => if_id_instr(<define bit> downto<define bit>),
-                funct7 => (<define bit> downto<define bit>),
+                funct3 => if_id_instr(14 downto 12),
+                funct7 => if_id_instr(31 downto 25),
                 alu_op => if_id_alu_op
             );	
 --------------------------------------------------------------------------------
     -- ID units
     -- Register file [used in ID and WB stages]
-    reg_write_chip <= <what control signal?>;
+    reg_write_chip <= mem_wb_reg_write;
     reg_file_inst: reg_file
         port map (
         clk       => clk,
@@ -357,8 +404,8 @@ begin
     alu_input_a <= id_ex_reg1_data;  
                        
     -- mux to select alu input B
-    alu_input_b <= <which_register> when <which_control_signal> else
-                   <which_register>;
+    alu_input_b <=  id_ex_imm when id_ex_alu_src = '1' else
+                    id_ex_reg2_data;
     -- ALU
     alu_inst: alu
         port map (
@@ -382,16 +429,16 @@ begin
         data_in   => ex_mem_reg2_data,
         data_out  => mem_data,
         mem_read  => ex_mem_mem_read,
-        mem_write => <what control signal?>
+        mem_write => ex_mem_mem_write
     );
     mem_wb_mem_data <= mem_data; 
 
     -- Comparator 
-    not_equal_flag <= '1' when <what do we compare to decide if we should branch?> else '0';
+    not_equal_flag <= '1' when ex_mem_reg1_data /= ex_mem_reg2_data else '0';
     
-    next_pc <= <math based on NPC and imm> when (<what control signals?>) else -- branch case
-               <math based on NPC and imm> when (<what control signals?>) else  -- jump case
-               NPC when (<what control signals? are any needed?>); -- note: this happens during IF !!! 1st two during MEM
+    next_pc <= std_logic_vector(signed(ex_mem_npc) + signed(ex_mem_imm)) when (ex_mem_branch = '1' and not_equal_flag = '1') else -- branch case
+               std_logic_vector(signed(ex_mem_npc) + signed(ex_mem_imm)) when (ex_mem_jump = '1') else  -- jump case
+               NPC; -- note: this happens during IF !!! 1st two during MEM
                       
     -- MEM/WB pipeline register
 
@@ -400,8 +447,8 @@ begin
     -- WB Units
     
     -- MUX to write back to register file
-    wb_data <= mem_wb_mem_data when (<what control signals?>) else 
-               x"10000000" when (<what control signals?>) else  -- hack for custom load_addr instruction
-               mem_wb_alu_result when (<what control signals?>);      
+    wb_data <= mem_wb_mem_data when (mem_wb_mem_read = '1') else 
+               x"10000000" when (mem_wb_load_addr = '1') else  -- hack for custom load_addr instruction
+               mem_wb_alu_result;      
    
 end Behavioral;
