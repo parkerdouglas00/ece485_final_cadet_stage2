@@ -11,14 +11,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="69.901 ns"></ZoomEndTime>
-      <Cursor1Time time="16.500 ns"></Cursor1Time>
+      <ZoomEndTime time="155.201 ns"></ZoomEndTime>
+      <Cursor1Time time="1,621.220 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="185"></NameColumnWidth>
-      <ValueColumnWidth column_width="75"></ValueColumnWidth>
+      <ValueColumnWidth column_width="71"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="50" />
+   <WVObjectSize size="37" />
    <wvobject type="logic" fp_name="/tb_riscv_pipeline/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -182,57 +182,5 @@
       <obj_property name="ElementShortName">display_x10[31:0]</obj_property>
       <obj_property name="ObjectShortName">display_x10[31:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/ex_mem_npc">
-      <obj_property name="ElementShortName">ex_mem_npc[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_npc[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/ex_mem_imm">
-      <obj_property name="ElementShortName">ex_mem_imm[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_imm[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/if_id_instr">
-      <obj_property name="ElementShortName">if_id_instr[31:0]</obj_property>
-      <obj_property name="ObjectShortName">if_id_instr[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/ex_mem_imm">
-      <obj_property name="ElementShortName">ex_mem_imm[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_imm[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/ex_mem_npc">
-      <obj_property name="ElementShortName">ex_mem_npc[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_npc[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/ex_mem_reg1_data">
-      <obj_property name="ElementShortName">ex_mem_reg1_data[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_reg1_data[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/ex_mem_reg2_data">
-      <obj_property name="ElementShortName">ex_mem_reg2_data[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_reg2_data[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/if_id_imm">
-      <obj_property name="ElementShortName">if_id_imm[31:0]</obj_property>
-      <obj_property name="ObjectShortName">if_id_imm[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/id_ex_imm">
-      <obj_property name="ElementShortName">id_ex_imm[31:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_imm[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/ex_mem_imm">
-      <obj_property name="ElementShortName">ex_mem_imm[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_imm[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/if_id_npc">
-      <obj_property name="ElementShortName">if_id_npc[31:0]</obj_property>
-      <obj_property name="ObjectShortName">if_id_npc[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/id_ex_npc">
-      <obj_property name="ElementShortName">id_ex_npc[31:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_npc[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_riscv_pipeline/uut/ex_mem_npc">
-      <obj_property name="ElementShortName">ex_mem_npc[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_npc[31:0]</obj_property>
    </wvobject>
 </wave_config>
